@@ -6,6 +6,7 @@
 	<title>Register for Full Stack Conf</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="normalize.css">
 </head>
 <body>
 	<div class="container">
@@ -34,7 +35,11 @@
           <option value="designer">Designer</option>          
           <option value="student">Student</option>
           <option value="other">Other</option>  
-        </select>           
+        </select>
+        <div id="toggle_other_job">
+          <label for="other_title">Job Role</label>           
+          <input type="text" id="other_title" name="user_title_other">
+        </div>
       </fieldset>
       
       <fieldset class="shirt">
@@ -151,5 +156,10 @@
     </form>
 
 	</div>
+<script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/script.js"></script>  
 </body>
 </html>
