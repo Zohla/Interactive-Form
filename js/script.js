@@ -22,8 +22,7 @@ $("#title").click(function(){
 });
 
 /**************T-SHIRT INFO***************************/
-// const $punShirt = /.*\(JS Puns shirt only\)/;
-// const $heartShirt = /.*\(I &#9829; JS shirt only\)/;
+
 
 
 $('#color').hide();//hides colors initially maby change so hides 'color' as well..
@@ -42,6 +41,9 @@ $("#design").click(function(){
   	$('#color option[value="dimgrey"]').attr('selected', true);
   }
 });
+
+
+/***************************ACTIVITIES********************************************/
 
 //makes and appends a new div to show total cost
 $('.activities').append('<div id="totalCost"></div>');
@@ -87,6 +89,8 @@ $('.activities').change((event)=>{
 	}
 });
 
+/**************************PAYMENT************************************/
+
 $('#payment').children('option').eq(0).hide();
 
 
@@ -99,22 +103,29 @@ const $bitcoin = $('#payment option[value = "bitcoin"]');
 const $payPalInfo = $('#credit-card').next();
 const $bitcoinInfo = $payPalInfo.next();
 
+//hides paypal and bit coin info to make credit card default.
+$payPalInfo.hide();
+$bitcoinInfo.hide();
 
-$('payment').change((event)=>{
+$('#payment option').change((event)=>{
 	let chosenPayment = event.target;
 	if (chosenPayment === $creditCard) {
 		$creditCardInfo.show();
 		$payPalInfo.hide();
 		$bitcoinInfo.hide();
+		console.log(chosenPayment);
 	}
 
-	if (chosenPayment === payPal) {
+	if (chosenPayment === $payPal) {
 		$('#credit-card').hide();
 		$payPalInfo.show();
 		$bitcoinInfo.hide();
 	}
-
-
+	if (chosenPayment === $bitcoin) {
+		$('#credit-card').hide();
+		$payPalInfo.hide();
+		$bitcoinInfo.show();
+	}
 });
 
 // $('#credit-card').hide();
