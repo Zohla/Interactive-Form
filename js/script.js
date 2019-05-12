@@ -73,34 +73,45 @@ $('.activities').change((event)=>{
 	let timeOfActivity = textContentOfClicked.slice(startIndexTime, endIndexTime);
 	
 
+
 	let activityInput = $('.activities input');
 
 	for (i=0; i < activityInput.length; i++) {
 		let inputText = $(activityInput[i]).parent().text();
-		console.log(activityInput[i]);
-		if (inputText.includes(timeOfActivity) && inputText !== textContentOfClicked[i]){
+		
+		if (inputText.includes(timeOfActivity) && clicked !== activityInput[i]){
 			if($(activityInput[i]).prop("checked") === false) {
-                   activityInput[i].disabled = true;
-                } 
-                else {
-                    activityInput[i].disabled = false;
-                  
+				activityInput[i].disabled = !activityInput[i].disabled; 
 				} 
-			// if (activityInput[i].checked){
-			// 	$('activityInput[i]').prop('disabled', false);
-			// } else {
-			// 	$('activityInput[i]').prop('disabled', true); 
-			// }
-
-
 		}
+	}
+});
 
+$('#payment').children('option').eq(0).hide();
+
+
+
+const $creditCard = $('#payment option[value = "credit card"]');
+const $creditCardInfo = $('#credit-card');
+const $payPal = $('#payment option[value = "paypal"]');
+const $bitcoin = $('#payment option[value = "bitcoin"]');
+// const traverseToPaymentFieldset = $('form:nth-child(4)')attr('id', 'paymentFieldSet');
+const $payPalInfo = $('#credit-card').next();
+const $bitcoinInfo = $payPalInfo.next();
+
+
+$('payment').change((event)=>{
+	let chosenPayment = event.target;
+	if (chosenPayment === creditCard) {
+		$creditCardInfo.show();
+		$payPalInfo.hide();
+		$bitcoinInfo.hide();
 	}
 
-})
+});
 
-
-
+// $('#credit-card').hide();
+// $('#credit-card').hide();
 // $('#design option').filter(function() {
 //     return  /\(JS Puns shirt only\)/.test(this.value);
 // }).remove();
