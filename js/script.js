@@ -66,6 +66,8 @@ $('.activities').change((event)=>{
 
 	}
 
+	$('#totalCost').text('Total: $' + activityCost);
+
 })
 
 
