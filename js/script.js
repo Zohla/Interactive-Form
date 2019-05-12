@@ -92,21 +92,28 @@ $('#payment').children('option').eq(0).hide();
 
 
 const $creditCard = $('#payment option[value = "credit card"]');
-const $creditCardInfo = $('#credit-card');
+const $creditCardInfo = $('#credit-card'); // I can delete this and use the id 
 const $payPal = $('#payment option[value = "paypal"]');
 const $bitcoin = $('#payment option[value = "bitcoin"]');
-// const traverseToPaymentFieldset = $('form:nth-child(4)')attr('id', 'paymentFieldSet');
+// const traverseToPaymentFieldset = $('form:nth-child(4)').attr('id', 'paymentFieldSet');
 const $payPalInfo = $('#credit-card').next();
 const $bitcoinInfo = $payPalInfo.next();
 
 
 $('payment').change((event)=>{
 	let chosenPayment = event.target;
-	if (chosenPayment === creditCard) {
+	if (chosenPayment === $creditCard) {
 		$creditCardInfo.show();
 		$payPalInfo.hide();
 		$bitcoinInfo.hide();
 	}
+
+	if (chosenPayment === payPal) {
+		$('#credit-card').hide();
+		$payPalInfo.show();
+		$bitcoinInfo.hide();
+	}
+
 
 });
 
