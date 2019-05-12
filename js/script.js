@@ -67,6 +67,35 @@ $('.activities').change((event)=>{
 	}
 
 	$('#totalCost').text('Total: $' + activityCost);
+	//gets the day and time of activities
+	let startIndexTime = textContentOfClicked.indexOf('—');
+	let endIndexTime = textContentOfClicked.indexOf(',');
+	let timeOfActivity = textContentOfClicked.slice(startIndexTime, endIndexTime);
+	
+
+	let activityInput = $('.activities input');
+
+	for (i=0; i < activityInput.length; i++) {
+		let inputText = $(activityInput[i]).parent().text();
+		console.log(activityInput[i]);
+		if (inputText.includes(timeOfActivity) && inputText !== textContentOfClicked[i]){
+			if($(activityInput[i]).prop("checked") === false) {
+                   activityInput[i].disabled = true;
+                } 
+                else {
+                    activityInput[i].disabled = false;
+                  
+				} 
+			// if (activityInput[i].checked){
+			// 	$('activityInput[i]').prop('disabled', false);
+			// } else {
+			// 	$('activityInput[i]').prop('disabled', true); 
+			// }
+
+
+		}
+
+	}
 
 })
 
