@@ -100,7 +100,8 @@ const $bitcoinInfo = $payPalInfo.next();
 $payPalInfo.hide();
 $bitcoinInfo.hide();
 
-$('#payment').change(()=>{
+
+$('#payment option').change(()=>{
 	let $valueOfOption = $('#payment').val();
 	if  ($valueOfOption === 'credit card') {
 		$('#credit-card').show();
@@ -138,7 +139,7 @@ function validName() {
 
 function validEmail() {
   const email = $('#mail').text();
-  const emailRegX = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  const emailRegX = /^[\w.]*@[\w]*.[\w]*$/;
   const emailResult = emailRegX.test(email);
   if (emailResult === false) {
   	$('#mail').css('borderColor', 'red');
@@ -146,6 +147,7 @@ function validEmail() {
   } else {
 		$('#mail').css('borderColor', '#c1deeb');
 		$('#incorrect').hide();
+
 	}
 }
 
@@ -191,9 +193,10 @@ $('button').click((event)=>{
 	$('#incorrect').remove();// not working, keeps adding.................................................
 	validName();
 	validEmail();
-	if ($valueOfOption === 'credit card'){
-		validCreditCard();
-	}
+	validCreditCard();
+	// if ($valueOfOption === 'credit card'){
+		
+	// }
 
 });
 
