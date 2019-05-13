@@ -101,7 +101,7 @@ $payPalInfo.hide();
 $bitcoinInfo.hide();
 
 
-$('#payment option').change(()=>{
+$('#payment').change(()=>{
 	let $valueOfOption = $('#payment').val();
 	if  ($valueOfOption === 'credit card') {
 		$('#credit-card').show();
@@ -147,7 +147,6 @@ function validEmail() {
   } else {
 		$('#mail').css('borderColor', '#c1deeb');
 		$('#incorrect').hide();
-
 	}
 }
 
