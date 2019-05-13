@@ -42,6 +42,7 @@ $("#design").click(function(){
   }
 });
 
+//need to make the initial value in the color drop down go away when design changes................................
 
 /***************************ACTIVITIES********************************************/
 
@@ -50,22 +51,19 @@ $('.activities').append('<div id="totalCost"></div>');
 
 let activityCost = 0;
 
-//event handler to keep track of cost ...so that no activities that collide can be chosen
+//event handler to keep track of cost and that no activities that collide can be chosen
 $('.activities').change((event)=>{
 	let clicked = event.target;
 	let textContentOfClicked = $(clicked).parent().text();
 	let indexOfCost = textContentOfClicked.indexOf('$');
 	let costOfActivity = textContentOfClicked.slice(indexOfCost);
-	//get price without '$'
-	let costOnlyNum = costOfActivity.slice(1);
+	let costOnlyNum = costOfActivity.slice(1); //get price without '$'
 	let costInt = parseInt(costOnlyNum);
 
 	if (clicked.checked) {
 		activityCost += costInt; 
-
 	} else {
 		activityCost -= costInt;
-
 	}
 
 	$('#totalCost').text('Total: $' + activityCost);
@@ -73,9 +71,6 @@ $('.activities').change((event)=>{
 	let startIndexTime = textContentOfClicked.indexOf('—');
 	let endIndexTime = textContentOfClicked.indexOf(',');
 	let timeOfActivity = textContentOfClicked.slice(startIndexTime, endIndexTime);
-	
-
-
 	let activityInput = $('.activities input');
 
 	for (i=0; i < activityInput.length; i++) {
@@ -93,8 +88,6 @@ $('.activities').change((event)=>{
 
 $('#payment').children('option').eq(0).hide();
 
-
-
 const $creditCard = $('#payment option[value = "credit card"]');
 const $creditCardInfo = $('#credit-card'); // I can delete this and use the id 
 const $payPal = $('#payment option[value = "paypal"]');
@@ -110,7 +103,7 @@ $bitcoinInfo.hide();
 $('#payment').change(()=>{
 	let $valueOfOption = $('#payment').val();
 	if  ($valueOfOption === 'credit card') {
-		$creditCardInfo.show();
+		$('#credit-card').show();
 		$payPalInfo.hide();
 		$bitcoinInfo.hide();
 		
@@ -129,6 +122,8 @@ $('#payment').change(()=>{
 });
 /***********************VALIDATION***********************************************/
 
+
+
 function validName() {
 	const name = $('#name');
 	if (name.val().length > 0) {
@@ -136,16 +131,71 @@ function validName() {
 		return true;
 	} else {
 		name.css('borderColor', 'red');
+		$('#name').prev().append('<span id="incorrect">  You need to enter a valid name.</span>');
 		return false;
 	}
 }
 
-function validEmail(email) {
-  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-  return regex.test(email);
+function validEmail() {
+  const email = $('#mail').text();
+  const emailRegX = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  const emailResult = emailRegX.test(email);
+  if (emailResult === false) {
+  	$('#mail').css('borderColor', 'red');
+  	$('#mail').prev().append('<span id="incorrect">  You need to enter a valid email adress.</span>');
+  } else {
+		$('#mail').css('borderColor', '#c1deeb');
+		$('#incorrect').hide();
+	}
 }
 
+function validActivty() {
 
+}
+
+function validCreditCard() {
+	const cardNumber = $('#cc-num').val();
+	const cardRegX = /\d{13,16}/;
+	const cardResult = cardRegX.test(cardNumber);
+	if (cardResult === false) {
+		$('#cc-num').css('borderColor', 'red');
+		$('#cc-num').prev().append('<span id="incorrect">  Enter valid card number.</span>');
+	} else {
+		$('#cc-num').css('borderColor', '#c1deeb');
+		$('#incorrect').hide();
+	}
+	const zipCode = $('#zip').val();
+	const zipRegX = /\d{5}/;
+	const zipResult = zipRegX.test(zipCode);
+	if (zipResult === false) {
+		$('#zip').css('borderColor', 'red');
+		$('#zip').prev().append('<span id="incorrect">Incorrect.</span>');
+	} else {
+		$('#zip').css('borderColor', '#c1deeb');
+		$('#incorrect').remove();
+	}
+	const cvv = $('#cvv').val();
+	const cvvRegX = /\d{3}/;
+	const cvvResult = cvvRegX.test(cvv);
+	if (cvvResult === false) {
+		$('#cvv').css('borderColor', 'red');
+		$('#cvv').prev().append('<span id="incorrect">Incorrect.</span>');
+	} else {
+		$('#cvv').css('borderColor', '#c1deeb');
+		$('#incorrect').hide();
+	}
+}
+
+$('button').click((event)=>{
+	event.preventDefault();
+	$('#incorrect').remove();// not working, keeps adding.................................................
+	validName();
+	validEmail();
+	if ($valueOfOption === 'credit card'){
+		validCreditCard();
+	}
+
+});
 
 
 
@@ -157,9 +207,7 @@ function validEmail(email) {
 
 /**********************************************************************************/
 
-// $('#design option').filter(function() {
-//     return  /\(JS Puns shirt only\)/.test(this.value);
-// }).remove();
+
 
  // /\(JS Puns shirt only\)/ //regEx for pun shirts
  // /\(I &#9829; JS shirt only\)/ //regEx for love shirts
