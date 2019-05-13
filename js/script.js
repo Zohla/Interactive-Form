@@ -107,29 +107,56 @@ const $bitcoinInfo = $payPalInfo.next();
 $payPalInfo.hide();
 $bitcoinInfo.hide();
 
-$('#payment option').change((event)=>{
-	let chosenPayment = event.target;
-	if (chosenPayment === $creditCard) {
+$('#payment').change(()=>{
+	let $valueOfOption = $('#payment').val();
+	if  ($valueOfOption === 'credit card') {
 		$creditCardInfo.show();
 		$payPalInfo.hide();
 		$bitcoinInfo.hide();
-		console.log(chosenPayment);
+		
 	}
 
-	if (chosenPayment === $payPal) {
+	if ($valueOfOption === $payPal.val()) {
 		$('#credit-card').hide();
 		$payPalInfo.show();
 		$bitcoinInfo.hide();
 	}
-	if (chosenPayment === $bitcoin) {
+	if ($valueOfOption === $bitcoin.val()) {
 		$('#credit-card').hide();
 		$payPalInfo.hide();
 		$bitcoinInfo.show();
 	}
 });
+/***********************VALIDATION***********************************************/
 
-// $('#credit-card').hide();
-// $('#credit-card').hide();
+function validName() {
+	const name = $('#name');
+	if (name.val().length > 0) {
+		name.css('borderColor', '#c1deeb');
+		return true;
+	} else {
+		name.css('borderColor', 'red');
+		return false;
+	}
+}
+
+function validEmail(email) {
+  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  return regex.test(email);
+}
+
+
+
+
+
+
+
+
+
+
+
+/**********************************************************************************/
+
 // $('#design option').filter(function() {
 //     return  /\(JS Puns shirt only\)/.test(this.value);
 // }).remove();
