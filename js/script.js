@@ -166,7 +166,17 @@ function validEmail() {
   }
   
 }
-
+function validJobTitle() {
+	let $valueOfJob = $('#title').val();
+	let $job = $('#other_title')
+	if ($valueOfJob === 'other' && $job.length === 0) {	
+		$('#other_title').css('borderColor', 'red');
+  	    $('#other_title').prev().append('<span class="incorrect">  You need to enter a job title.</span>');
+		return false;
+	} else {
+		return true;
+	}
+} 
 // function validActivty() {
 // 	const 
 
@@ -179,11 +189,11 @@ function validCreditCard() {
 	if (cardResult === false) {
 		$('#cc-num').css('borderColor', 'red');
 		$('#cc-num').prev().append('<span class="incorrect">  Enter valid card number.</span>');
-		return false;
+		
 	} else {
 		$('#cc-num').css('borderColor', '#c1deeb');
 		$('.incorrect').hide();
-		return true;
+		
 	}
 	const zipCode = $('#zip').val();
 	const zipRegX = /\d{5}/;
@@ -191,11 +201,11 @@ function validCreditCard() {
 	if (zipResult === false) {
 		$('#zip').css('borderColor', 'red');
 		$('#zip').prev().append('<span class="incorrect">Incorrect.</span>');
-		return false;
+		// return false;
 	} else {
 		$('#zip').css('borderColor', '#c1deeb');
 		$('.incorrect').hide();
-		return true;
+		// return true;
 	}
 	const cvv = $('#cvv').val();
 	const cvvRegX = /\d{3}/;
@@ -203,11 +213,11 @@ function validCreditCard() {
 	if (cvvResult === false) {
 		$('#cvv').css('borderColor', 'red');
 		$('#cvv').prev().append('<span class="incorrect">Incorrect.</span>');
-		return false;
+		// return false;
 	} else {
 		$('#cvv').css('borderColor', '#c1deeb');
 		$('.incorrect').hide();
-		return true;
+		// return true;
 	}
 }
 
@@ -221,6 +231,7 @@ $('button').click((event)=>{
 	validName();
 	validEmail();
 	validCreditCard();
+	validJobTitle()
 	// if ($valueOfOption === 'credit card'){
 		
 	// }
