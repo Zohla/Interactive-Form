@@ -137,7 +137,8 @@ button:hover {
 
 .incorrect {
 	color: red;
-	font-size: .75em;
+	background-color: beige;
+	font-size: .85em;
 }
 
 /* ================================= 

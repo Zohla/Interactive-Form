@@ -152,21 +152,28 @@ function validName() {
 }
 
 function validEmail() {
-  const email = $('#mail').text();
-  const emailRegX = /^[\w.]*@[\w]*.[\w]*$/;
-  const emailResult = emailRegX.test(email);
-  if (emailResult === false) {
+  const $email = $('#mail').text();
+  const $emailRegX = /^[\w.]*@[\w]*.[\w]*$/;
+  const $emailResult = $emailRegX.test($email);
+  if ($emailResult === false) {
   	$('#mail').css('borderColor', 'red');
   	$('#mail').prev().append('<span class="incorrect">  You need to enter a valid email adress.</span>');
-  	// return false;
+  	return false;
   } else {
 	$('#mail').css('borderColor', '#c1deeb');
 	$('.incorrect').hide();
-	// return true;
+	return true;
   }
   
 }
-function validJobTitle() {
+function validActivities(){
+	if ($('.activities input:checkbox:checked').length<1){
+		$('.activities').css('borderColor', 'red');
+  		$('.activities').prepend('<span class="incorrect">  You need to choose at least one activity.</span>');
+		return false;
+	} 
+}
+function validJobTitle() {//....................not working........................
 	let $valueOfJob = $('#title').val();
 	let $job = $('#other_title')
 	if ($valueOfJob === 'other' && $job.length === 0) {	
@@ -177,10 +184,7 @@ function validJobTitle() {
 		return true;
 	}
 } 
-// function validActivty() {
-// 	const 
-
-// }
+// 
 
 function validCreditCard() {
 	const cardNumber = $('#cc-num').val();
@@ -200,7 +204,7 @@ function validCreditCard() {
 	const zipResult = zipRegX.test(zipCode);
 	if (zipResult === false) {
 		$('#zip').css('borderColor', 'red');
-		$('#zip').prev().append('<span class="incorrect">Incorrect.</span>');
+		$('#zip').prev().append('<span class="incorrect">  Incorrect.</span>');
 		// return false;
 	} else {
 		$('#zip').css('borderColor', '#c1deeb');
@@ -212,7 +216,7 @@ function validCreditCard() {
 	const cvvResult = cvvRegX.test(cvv);
 	if (cvvResult === false) {
 		$('#cvv').css('borderColor', 'red');
-		$('#cvv').prev().append('<span class="incorrect">Incorrect.</span>');
+		$('#cvv').prev().append('<span class="incorrect">  Incorrect.</span>');
 		// return false;
 	} else {
 		$('#cvv').css('borderColor', '#c1deeb');
@@ -231,7 +235,8 @@ $('button').click((event)=>{
 	validName();
 	validEmail();
 	validCreditCard();
-	validJobTitle()
+	validJobTitle();
+	validActivities();
 	// if ($valueOfOption === 'credit card'){
 		
 	// }
