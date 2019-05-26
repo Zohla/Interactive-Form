@@ -7,6 +7,9 @@ $('form')[0].reset();
 // Hides other job text input on page load
 $('#toggle_other_job').hide();
 
+//set credit card as default payment method
+$('#payment option:eq(1)').prop('selected', true);
+
 
 //selects field by id and focuses the name textfield on page load
 $("#name").focus();
@@ -117,6 +120,8 @@ $bitcoinInfo.hide();
 
 $('#payment').change(()=>{
 	let $valueOfOption = $('#payment').val();
+
+
 	if  ($valueOfOption === 'credit card') {
 		$('#credit-card').show();
 		$payPalInfo.hide();
@@ -140,12 +145,12 @@ $('#payment').change(()=>{
 
 
 function validName() {
-	const name = $('#name');
-	if (name.val().length > 0) {
-		name.css('borderColor', '#c1deeb');
+	const $name = $('#name');
+	if ($name.val().length > 0) {
+		$name.css('borderColor', '#c1deeb');
 		return true;
 	} else {
-		name.css('borderColor', 'red');
+		$name.css('borderColor', 'red');
 		$('#name').prev().append('<span class="incorrect">  You need to enter a valid name.</span>');
 		return false;
 	}
@@ -168,7 +173,7 @@ function validEmail() {
 }
 function validActivities(){
 	if ($('.activities input:checkbox:checked').length<1){
-		$('.activities').css('borderColor', 'red');
+		$('.activities').css('color', 'red');
   		$('.activities').prepend('<span class="incorrect">  You need to choose at least one activity.</span>');
 		return false;
 	} 
@@ -217,29 +222,52 @@ function validCreditCard() {
 	if (cvvResult === false) {
 		$('#cvv').css('borderColor', 'red');
 		$('#cvv').prev().append('<span class="incorrect">  Incorrect.</span>');
-		// return false;
+		return false;
+
 	} else {
 		$('#cvv').css('borderColor', '#c1deeb');
 		$('.incorrect').hide();
-		// return true;
+		return true;
 	}
 }
 
-// function validateForm() {
-// 	let validForm = true;
-// 	if 
-// }
-$('button').click((event)=>{
-	event.preventDefault();
-	$('.incorrect').remove();
-	validName();
-	validEmail();
-	validCreditCard();
-	validJobTitle();
-	validActivities();
-	// if ($valueOfOption === 'credit card'){
-		
+function validateForm() {
+	let validForm = true;
+	if (validName()== false){
+		validForm = false;
+	}
+	if (validEmail()== false){
+		validForm = false;
+	}
+	if (validActivities()== false){
+		validForm = false;
+	}
+	if ($('#payment').val()==='credit card'){
+		if (validCreditCard()== false){
+		validForm = false;
+		}
+	}
+	// if ($('#payment').val()==='select_method') {
+	// 	validForm = false;
 	// }
+	return validForm;
+
+}
+$('button').click((event)=>{
+	$('.incorrect').remove();
+	// validName();
+	// validEmail();
+	// validCreditCard();
+	// validJobTitle();
+	// validActivities();
+	validateForm();
+	event.preventDefault();
+	// validateForm();
+	// if (validForm == false){
+	// event.preventDefault();
+	// }
+	
+	
 
 });
 
