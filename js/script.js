@@ -26,7 +26,7 @@ $("#title").click(function(){
 
 /**************T-SHIRT INFO***************************/
 const $colorHeading = $('#color').prev(); //gets color heading
-const $choose = $('<option value="choose">Choose Color</option>') //adds an option to the dropdown menu
+const $choose = $('<option value="choose">Please select a T-shirt theme</option>') //adds an option to the dropdown menu
 
 $('#color').hide();//hides colors initially 
 $colorHeading.hide();//hides color heading
@@ -157,9 +157,9 @@ function validName() {
 }
 
 function validEmail() {
-  const $email = $('#mail').text();
+  const $email = $('#mail');
   const $emailRegX = /^[\w.]*@[\w]*.[\w]*$/;
-  const $emailResult = $emailRegX.test($email);
+  const $emailResult = $emailRegX.test($email.val());
   if ($emailResult === false) {
   	$('#mail').css('borderColor', 'red');
   	$('#mail').prev().append('<span class="incorrect">  You need to enter a valid email adress.</span>');
@@ -169,26 +169,30 @@ function validEmail() {
 	$('.incorrect').hide();
 	return true;
   }
-  
+  console.log($emailResult);
 }
 function validActivities(){
 	if ($('.activities input:checkbox:checked').length<1){
 		$('.activities').css('color', 'red');
   		$('.activities').prepend('<span class="incorrect">  You need to choose at least one activity.</span>');
 		return false;
-	} 
-}
-function validJobTitle() {//....................not working........................
-	let $valueOfJob = $('#title').val();
-	let $job = $('#other_title')
-	if ($valueOfJob === 'other' && $job.length === 0) {	
-		$('#other_title').css('borderColor', 'red');
-  	    $('#other_title').prev().append('<span class="incorrect">  You need to enter a job title.</span>');
-		return false;
 	} else {
+		$('.activities').css('color', '#184f68');
 		return true;
 	}
-} 
+	
+}
+// function validJobTitle() {//....................not working........................
+// 	let $valueOfJob = $('#title').val();
+// 	let $job = $('#other_title')
+// 	if ($valueOfJob === 'other' && $job.length === 0) {	
+// 		$('#other_title').css('borderColor', 'red');
+//   	    $('#other_title').prev().append('<span class="incorrect">  You need to enter a job title.</span>');
+// 		return false;
+// 	} else {
+// 		return true;
+// 	}
+// } 
 // 
 
 function validCreditCard() {
@@ -198,6 +202,7 @@ function validCreditCard() {
 	if (cardResult === false) {
 		$('#cc-num').css('borderColor', 'red');
 		$('#cc-num').prev().append('<span class="incorrect">  Enter valid card number.</span>');
+		console.log(cardResult);
 		
 	} else {
 		$('#cc-num').css('borderColor', '#c1deeb');
@@ -211,6 +216,7 @@ function validCreditCard() {
 		$('#zip').css('borderColor', 'red');
 		$('#zip').prev().append('<span class="incorrect">  Incorrect.</span>');
 		// return false;
+		console.log(zipResult);
 	} else {
 		$('#zip').css('borderColor', '#c1deeb');
 		$('.incorrect').hide();
@@ -222,6 +228,7 @@ function validCreditCard() {
 	if (cvvResult === false) {
 		$('#cvv').css('borderColor', 'red');
 		$('#cvv').prev().append('<span class="incorrect">  Incorrect.</span>');
+		console.log(cvvResult);
 		return false;
 
 	} else {
@@ -229,21 +236,28 @@ function validCreditCard() {
 		$('.incorrect').hide();
 		return true;
 	}
+	
+	
+	
+	
+	
+
 }
 
+let validForm = true;
 function validateForm() {
-	let validForm = true;
-	if (validName()== false){
+	
+	if (validName() == false){
 		validForm = false;
 	}
-	if (validEmail()== false){
+	if (validEmail() == false){
 		validForm = false;
 	}
-	if (validActivities()== false){
+	if (validActivities() == false){
 		validForm = false;
 	}
-	if ($('#payment').val()==='credit card'){
-		if (validCreditCard()== false){
+	if ($('#payment').val() ==='credit card'){
+		if (validCreditCard() == false){
 		validForm = false;
 		}
 	}
@@ -253,19 +267,19 @@ function validateForm() {
 	return validForm;
 
 }
-$('button').click((event)=>{
+$('form').submit((event)=>{
 	$('.incorrect').remove();
 	// validName();
 	// validEmail();
 	// validCreditCard();
 	// validJobTitle();
 	// validActivities();
-	validateForm();
-	event.preventDefault();
-	// validateForm();
-	// if (validForm == false){
+
 	// event.preventDefault();
-	// }
+	// validateForm();
+	if (validateForm() == false){
+	event.preventDefault();
+	}
 	
 	
 

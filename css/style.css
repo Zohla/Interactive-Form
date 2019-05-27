@@ -74,6 +74,8 @@ label {
 	color: #000;
 	display: block;
 	margin-bottom: .5em;
+	padding-top: .5em;
+
 }
 
 input,
