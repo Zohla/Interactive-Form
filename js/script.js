@@ -173,7 +173,7 @@ function validEmail() {
 }
 function validActivities(){
 	if ($('.activities input:checkbox:checked').length<1){
-		$('.activities').css('color', 'red');
+		$('.activities').css({'border-color': 'red', 'border-width': '2px', 'border-style': 'solid'});
   		$('.activities').prepend('<span class="incorrect">  You need to choose at least one activity.</span>');
 		return false;
 	} else {
@@ -261,8 +261,16 @@ function validateForm() {
 			validForm = false;
 			
 		}
-		
 	}
+	
+	// if ($valueOfJob === 'other' && $job.length == 0) {	
+	// 	$('#other_title').css('border', '2px');
+ //  	    $('#other_title').prev().append('<span class="incorrect">  You need to enter a job title.</span>');
+	// 	validForm = false;
+	// 	} 
+
+
+	
 	// if ($('#payment').val()==='select_method') {
 	// 	validForm = false;
 	// }
