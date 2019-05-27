@@ -195,40 +195,44 @@ function validActivities(){
 // } 
 // 
 
-function validCreditCard() {
+function validCardNumber() {
 	const cardNumber = $('#cc-num').val();
 	const cardRegX = /\d{13,16}/;
 	const cardResult = cardRegX.test(cardNumber);
 	if (cardResult === false) {
 		$('#cc-num').css('borderColor', 'red');
 		$('#cc-num').prev().append('<span class="incorrect">  Enter valid card number.</span>');
-		console.log(cardResult);
+		
 		
 	} else {
 		$('#cc-num').css('borderColor', '#c1deeb');
 		$('.incorrect').hide();
 		
 	}
+}
+function validZipCode() {
 	const zipCode = $('#zip').val();
 	const zipRegX = /\d{5}/;
 	const zipResult = zipRegX.test(zipCode);
 	if (zipResult === false) {
 		$('#zip').css('borderColor', 'red');
 		$('#zip').prev().append('<span class="incorrect">  Incorrect.</span>');
-		// return false;
-		console.log(zipResult);
+		return false;
+		
 	} else {
 		$('#zip').css('borderColor', '#c1deeb');
 		$('.incorrect').hide();
-		// return true;
+		return true;
 	}
+}
+function validCVV() {
 	const cvv = $('#cvv').val();
 	const cvvRegX = /\d{3}/;
 	const cvvResult = cvvRegX.test(cvv);
 	if (cvvResult === false) {
 		$('#cvv').css('borderColor', 'red');
 		$('#cvv').prev().append('<span class="incorrect">  Incorrect.</span>');
-		console.log(cvvResult);
+		
 		return false;
 
 	} else {
@@ -236,13 +240,9 @@ function validCreditCard() {
 		$('.incorrect').hide();
 		return true;
 	}
-	
-	
-	
-	
-	
-
 }
+	
+	
 
 let validForm = true;
 function validateForm() {
@@ -256,10 +256,12 @@ function validateForm() {
 	if (validActivities() == false){
 		validForm = false;
 	}
-	if ($('#payment').val() ==='credit card'){
-		if (validCreditCard() == false){
-		validForm = false;
+	if ($('#payment').val() ==='credit card') {
+		if (validCardNumber() == false || validZipCode() == false || validCVV() == false){
+			validForm = false;
+			
 		}
+		
 	}
 	// if ($('#payment').val()==='select_method') {
 	// 	validForm = false;
