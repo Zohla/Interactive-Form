@@ -171,6 +171,8 @@ function validEmail() {
   }
   console.log($emailResult);
 }
+
+
 function validActivities(){
 	if ($('.activities input:checkbox:checked').length<1){
 		$('.activities').css({'border-color': 'red', 'border-width': '2px', 'border-style': 'solid'});
@@ -178,6 +180,9 @@ function validActivities(){
 		return false;
 	} else {
 		$('.activities').css('color', '#184f68');
+		$('.activities').css({'border-color': 'red', 'border-width': '0px', 'border-style': 'solid'});
+
+		
 		return true;
 	}
 	
@@ -244,23 +249,27 @@ function validCVV() {
 	
 	
 
-let validForm = true;
+
 function validateForm() {
+	let validForm = true;
 	
 	if (validName() == false){
 		validForm = false;
 	}
+	console.log(validForm);
 	if (validEmail() == false){
 		validForm = false;
 	}
+	console.log(validForm);
 	if (validActivities() == false){
 		validForm = false;
 	}
+	console.log(validForm);
 	if ($('#payment').val() ==='credit card') {
 		if (validCardNumber() == false || validZipCode() == false || validCVV() == false){
 			validForm = false;
-			
-		}
+		} 
+	console.log(validForm);
 	}
 	
 	// if ($valueOfJob === 'other' && $job.length == 0) {	
@@ -268,27 +277,19 @@ function validateForm() {
  //  	    $('#other_title').prev().append('<span class="incorrect">  You need to enter a job title.</span>');
 	// 	validForm = false;
 	// 	} 
-
-
-	
-	// if ($('#payment').val()==='select_method') {
-	// 	validForm = false;
-	// }
 	return validForm;
+	console.log(validForm);
 
 }
 $('form').submit((event)=>{
 	$('.incorrect').remove();
-	// validName();
-	// validEmail();
-	// validCreditCard();
-	// validJobTitle();
-	// validActivities();
+	
 
-	// event.preventDefault();
-	// validateForm();
 	if (validateForm() == false){
 	event.preventDefault();
+	} else {
+		$('.incorrect').remove();
+		alert('Your form is submittet. We look forward to seeing you!');
 	}
 	
 	
