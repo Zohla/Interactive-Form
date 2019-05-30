@@ -160,17 +160,25 @@ function validEmail() {
   const $email = $('#mail');
   const $emailRegX = /^[\w.]*@[\w]*.[\w]*$/;
   const $emailResult = $emailRegX.test($email.val());
+
+  // $('$email').keyup(()=> {
+  // 	// let typed = event.target;
   if ($emailResult === false) {
   	$('#mail').css('borderColor', 'red');
   	$('#mail').prev().append('<span class="incorrect">  You need to enter a valid email adress.</span>');
   	return false;
-  } else {
+
+  }else {
 	$('#mail').css('borderColor', '#c1deeb');
 	$('.incorrect').hide();
 	return true;
   }
   console.log($emailResult);
-}
+};
+
+  
+  
+
 
 
 function validActivities(){
@@ -207,13 +215,15 @@ function validCardNumber() {
 	if (cardResult === false) {
 		$('#cc-num').css('borderColor', 'red');
 		$('#cc-num').prev().append('<span class="incorrect">  Enter valid card number.</span>');
-		
+		// return false;
 		
 	} else {
 		$('#cc-num').css('borderColor', '#c1deeb');
 		$('.incorrect').hide();
+		// return true;
 		
 	}
+	console.log(validCardNumber)
 }
 function validZipCode() {
 	const zipCode = $('#zip').val();
@@ -266,10 +276,16 @@ function validateForm() {
 	}
 	console.log(validForm);
 	if ($('#payment').val() ==='credit card') {
-		if (validCardNumber() == false || validZipCode() == false || validCVV() == false){
+		if (validCardNumber() == false) {   
 			validForm = false;
+		}
+		if (validZipCode() == false){
+			validForm = false;
+		}
+		if (validCVV() == false){
+			validForm == false;
 		} 
-	console.log(validForm);
+	console.log(validForm + 'validForm');
 	}
 	
 	// if ($valueOfJob === 'other' && $job.length == 0) {	
