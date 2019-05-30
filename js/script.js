@@ -215,12 +215,12 @@ function validCardNumber() {
 	if (cardResult === false) {
 		$('#cc-num').css('borderColor', 'red');
 		$('#cc-num').prev().append('<span class="incorrect">  Enter valid card number.</span>');
-		// return false;
+		return false;
 		
 	} else {
 		$('#cc-num').css('borderColor', '#c1deeb');
 		$('.incorrect').hide();
-		// return true;
+		return true;
 		
 	}
 	console.log(validCardNumber)
