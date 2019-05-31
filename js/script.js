@@ -143,34 +143,60 @@ $('#payment').change(()=>{
 /***********************VALIDATION***********************************************/
 
 
-
+//validated that there is a name entered and that the name is formatted with at least one space.
+//Extra credit: Gives different error messages depending on blank field or wrongly formatted name. 
 function validName() {
 	const $name = $('#name');
-	if ($name.val().length > 0) {
+	const $nameRegEx =   /[A-Z]*[a-z]* [A-Z]*[a-z]*/;
+	const $nameResult = $nameRegEx.test($name.val());
+	if ($name.val().length > 0 && $nameResult == true) {
 		$name.css('borderColor', '#c1deeb');
 		return true;
-	} else {
+	} else if ($name.val().length > 0 && $nameResult == false){
 		$name.css('borderColor', 'red');
 		$('#name').prev().append('<span class="incorrect">  You need to enter a valid name.</span>');
 		return false;
+	} else {
+		$name.css('borderColor', 'red');
+		$('#name').prev().append('<span class="incorrect">  Please fill out name field.</span>');
+		return false;
+
 	}
 }
+//Extra credit real time validation
+$("#name").on('keyup', function(){
+	$('.incorrect').remove();
+
+	validName();
+});
 
 function validEmail() {
   const $email = $('#mail');
   const $emailRegX = /^[\w.]*@[\w]*.[\w]*$/;
   const $emailResult = $emailRegX.test($email.val());
+	
   if ($emailResult === false) {
   	$('#mail').css('borderColor', 'red');
   	$('#mail').prev().append('<span class="incorrect">  You need to enter a valid email adress.</span>');
   	return false;
-  } else {
+
+  }else {
 	$('#mail').css('borderColor', '#c1deeb');
 	$('.incorrect').hide();
 	return true;
   }
   console.log($emailResult);
-}
+};
+
+$('#email').on('input',(e) => {
+	
+
+	validEmail();
+});
+
+  
+  
+
 
 
 function validActivities(){
@@ -207,13 +233,15 @@ function validCardNumber() {
 	if (cardResult === false) {
 		$('#cc-num').css('borderColor', 'red');
 		$('#cc-num').prev().append('<span class="incorrect">  Enter valid card number.</span>');
-		
+		return false;
 		
 	} else {
 		$('#cc-num').css('borderColor', '#c1deeb');
 		$('.incorrect').hide();
+		return true;
 		
 	}
+	console.log(validCardNumber)
 }
 function validZipCode() {
 	const zipCode = $('#zip').val();
@@ -266,10 +294,16 @@ function validateForm() {
 	}
 	console.log(validForm);
 	if ($('#payment').val() ==='credit card') {
-		if (validCardNumber() == false || validZipCode() == false || validCVV() == false){
+		if (validCardNumber() == false) {   
 			validForm = false;
+		}
+		if (validZipCode() == false){
+			validForm = false;
+		}
+		if (validCVV() == false){
+			validForm == false;
 		} 
-	console.log(validForm);
+	console.log(validForm + 'validForm');
 	}
 	
 	// if ($valueOfJob === 'other' && $job.length == 0) {	
@@ -297,16 +331,4 @@ $('form').submit((event)=>{
 });
 
 
-
-
-
-
-
-
-
 /**********************************************************************************/
-
-
-
- // /\(JS Puns shirt only\)/ //regEx for pun shirts
- // /\(I &#9829; JS shirt only\)/ //regEx for love shirts
