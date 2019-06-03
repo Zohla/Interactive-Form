@@ -1,6 +1,7 @@
 
 
 /**********PAGE LOAD*******************/
+
 //resets form inputs
 $('form')[0].reset();
 
@@ -15,6 +16,7 @@ $('#payment option:eq(1)').prop('selected', true);
 $("#name").focus();
 
 /************JOB ROLE*************************/
+
 // adds function to show text field if 'other' job role is chosen. 
 $("#title").click(function(){
   if  ($('#title').val() === 'other'){
@@ -26,40 +28,71 @@ $("#title").click(function(){
 
 /**************T-SHIRT INFO***************************/
 const $colorHeading = $('#color').prev(); //gets color heading
-const $choose = $('<option value="choose">Please select a T-shirt theme</option>') //adds an option to the dropdown menu
+const $chooseColor = $('<option class="hideOption" value="choose">Please select a T-shirt theme</option>') //adds an option to the dropdown menu
+const $designSelector = $('#design option').first().attr('value', 'theme');
 
 $('#color').hide();//hides colors initially 
+$('#color').prepend($chooseColor);
 $colorHeading.hide();//hides color heading
+console.log($chooseColor);
+console.log($designSelector);
 
-$('#color').prepend($choose);
 $("#design").change(function(){
+	  $designSelector.hide();
+
+	  // $chooseColor.hide();
 	
 	  if  ($('#design').val() === 'js puns'){ 
-	  	$('#color').show(500);//shows colors
+	  	
+
+	  	$('#color').show(300);
 	  	$colorHeading.show(400);
-	  	$('#color option:eq(0)').prop('selected', true);//shows 'choose color' in drop down
+	  	$('#color option:eq(0)').prop('selected', true);//shows 'Please select a T-shirt theme in drop down
 	  	$('#color option[value="dimgrey"],[value="steelblue"],[value="tomato"]').hide();
 	  	$('#color option[value="cornflowerblue"],[value="darkslategrey"],[value="gold"]').show();
 	  	$('#color option[value="dimgrey"],[value="steelblue"],[value="tomato"]').attr('selected', false);
+
+	  	if  ($('#color option:eq(0).selected'))  {
+	  		$chooseColor.hide();
+	  		// $('#color option:eq(1)').prop('selected', true);
+
+	  		
+	  	} else {
+	  		$chooseColor.remove();
+
+	  	}
 	  	
 	  	
 	  } else {
 	  	$('#color').hide();
 	  	$colorHeading.hide();
 	  }
+
 	  if ($('#design').val() === 'heart js'){
-	  	$('#color').show(500);
+	  		
+	  	$('#color').show(300);
 	  	$colorHeading.show(400);	
 	  	$('#color option:eq(0)').prop('selected', true);
 	  	$('#color option[value="dimgrey"],[value="steelblue"],[value="tomato"]').show();
 	  	$('#color option[value="cornflowerblue"],[value="darkslategrey"],[value="gold"]').hide();
 	  	$('#color option[value="cornflowerblue"],[value="darkslategrey"],[value="gold"]').attr('selected', false);
+
+	  	if  ($('#color option:eq(0).selected'))  {
+	  		$chooseColor.hide();
+	  		// $('#color option:eq(4)').prop('selected', true);
+	  		
+	  	} else {
+	  		$chooseColor.remove();
+
+	  	}
+
+
 	  	
 	  	
 	  } 
 });
 
-//need to make the initial value in the color drop down go away when design changes................................
+
 
 /***************************ACTIVITIES********************************************/
 
@@ -67,6 +100,7 @@ $("#design").change(function(){
 $('.activities').append('<div id="totalCost"></div>');
 
 let activityCost = 0;
+
 
 //event handler to keep track of cost and that no activities that collide can be chosen
 $('.activities').change((event)=>{
@@ -213,18 +247,7 @@ function validActivities(){
 	}
 	
 }
-// function validJobTitle() {//....................not working........................
-// 	let $valueOfJob = $('#title').val();
-// 	let $job = $('#other_title')
-// 	if ($valueOfJob === 'other' && $job.length === 0) {	
-// 		$('#other_title').css('borderColor', 'red');
-//   	    $('#other_title').prev().append('<span class="incorrect">  You need to enter a job title.</span>');
-// 		return false;
-// 	} else {
-// 		return true;
-// 	}
-// } 
-// 
+
 
 function validCardNumber() {
 	const cardNumber = $('#cc-num').val();
@@ -315,6 +338,7 @@ function validateForm() {
 	console.log(validForm);
 
 }
+
 $('form').submit((event)=>{
 	$('.incorrect').remove();
 	
