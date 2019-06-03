@@ -54,6 +54,8 @@ $("#design").change(function(){
 
 	  	if  ($('#color option:eq(0).selected'))  {
 	  		$chooseColor.hide();
+	  		// $('#color option:eq(1)').prop('selected', true);
+
 	  		
 	  	} else {
 	  		$chooseColor.remove();
@@ -65,6 +67,7 @@ $("#design").change(function(){
 	  	$('#color').hide();
 	  	$colorHeading.hide();
 	  }
+
 	  if ($('#design').val() === 'heart js'){
 	  		
 	  	$('#color').show(300);
@@ -76,6 +79,7 @@ $("#design").change(function(){
 
 	  	if  ($('#color option:eq(0).selected'))  {
 	  		$chooseColor.hide();
+	  		// $('#color option:eq(4)').prop('selected', true);
 	  		
 	  	} else {
 	  		$chooseColor.remove();
