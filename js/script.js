@@ -326,7 +326,7 @@ function validateForm() {
 		if (validCVV() == false){
 			validForm == false;
 		} 
-	console.log(validForm + 'validForm');
+	console.log(validForm + ' validForm');
 	}
 	
 	// if ($valueOfJob === 'other' && $job.length == 0) {	
@@ -335,7 +335,7 @@ function validateForm() {
 	// 	validForm = false;
 	// 	} 
 	return validForm;
-	console.log(validForm);
+	
 
 }
 
