@@ -47,7 +47,7 @@ $("#design").change(function(){
 
 	  	$('#color').show(300);
 	  	$colorHeading.show(400);
-	  	$('#color option:eq(0)').prop('selected', true);//shows 'Please select a T-shirt theme in drop down
+	  	$('#color option:eq(1)').prop('selected', true);//shows 'Please select a T-shirt theme in drop down
 	  	$('#color option[value="dimgrey"],[value="steelblue"],[value="tomato"]').hide();
 	  	$('#color option[value="cornflowerblue"],[value="darkslategrey"],[value="gold"]').show();
 	  	$('#color option[value="dimgrey"],[value="steelblue"],[value="tomato"]').attr('selected', false);
@@ -72,7 +72,7 @@ $("#design").change(function(){
 	  		
 	  	$('#color').show(300);
 	  	$colorHeading.show(400);	
-	  	$('#color option:eq(0)').prop('selected', true);
+	  	$('#color option:eq(4)').prop('selected', true);
 	  	$('#color option[value="dimgrey"],[value="steelblue"],[value="tomato"]').show();
 	  	$('#color option[value="cornflowerblue"],[value="darkslategrey"],[value="gold"]').hide();
 	  	$('#color option[value="cornflowerblue"],[value="darkslategrey"],[value="gold"]').attr('selected', false);
