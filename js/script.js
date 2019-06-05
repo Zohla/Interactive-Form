@@ -185,21 +185,22 @@ function validName() {
 	const $nameResult = $nameRegEx.test($name.val());
 	if ($name.val().length > 0 && $nameResult == true) {
 		$name.css('borderColor', '#c1deeb');
+
 		return true;
 	} else if ($name.val().length > 0 && $nameResult == false){
 		$name.css('borderColor', 'red');
-		$('#name').prev().append('<span class="incorrect">  You need to enter a valid name.</span>');
+		$('#name').prev().append('<span class="incorrectName">  You need to enter a valid name.</span>');
 		return false;
 	} else {
 		$name.css('borderColor', 'red');
-		$('#name').prev().append('<span class="incorrect">  Please fill out name field.</span>');
+		$('#name').prev().append('<span class="incorrectName">  Please fill out name field.</span>');
 		return false;
 
 	}
 }
 //Extra credit real time validation
 $("#name").on('keyup', function(){
-	$('.incorrect').remove();
+	$('.incorrectName').remove();
 
 	validName();
 });
@@ -341,6 +342,7 @@ function validateForm() {
 
 $('form').submit((event)=>{
 	$('.incorrect').remove();
+	$('.incorrectName').remove()
 	
 
 	if (validateForm() == false){

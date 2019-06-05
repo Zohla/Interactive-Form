@@ -137,7 +137,8 @@ button:hover {
 	margin-top: 1.25em;
 }
 
-.incorrect {
+.incorrect,
+.incorrectName {
 	color: red;
 	background-color: #accbd9 ;
 	font-size: .85em;
