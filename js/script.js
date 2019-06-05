@@ -324,7 +324,7 @@ function validateForm() {
 			validForm = false;
 		}
 		if (validCVV() == false){
-			validForm == false;
+			validForm = false;
 		} 
 	console.log(validForm + ' validForm');
 	}
