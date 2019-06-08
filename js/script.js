@@ -308,15 +308,15 @@ function validateForm() {
 	if (validName() == false){
 		validForm = false;
 	}
-	console.log(validForm);
+	
 	if (validEmail() == false){
 		validForm = false;
 	}
-	console.log(validForm);
+	
 	if (validActivities() == false){
 		validForm = false;
 	}
-	console.log(validForm);
+	
 	if ($('#payment').val() ==='credit card') {
 		if (validCardNumber() == false) {   
 			validForm = false;
@@ -327,14 +327,9 @@ function validateForm() {
 		if (validCVV() == false){
 			validForm = false;
 		} 
-	console.log(validForm + ' validForm');
+	
 	}
 	
-	// if ($valueOfJob === 'other' && $job.length == 0) {	
-	// 	$('#other_title').css('border', '2px');
- //  	    $('#other_title').prev().append('<span class="incorrect">  You need to enter a job title.</span>');
-	// 	validForm = false;
-	// 	} 
 	return validForm;
 	
 
