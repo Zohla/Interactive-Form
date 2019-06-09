@@ -34,13 +34,10 @@ const $designSelector = $('#design option').first().attr('value', 'theme');
 $('#color').hide();//hides colors initially 
 $('#color').prepend($chooseColor);
 $colorHeading.hide();//hides color heading
-console.log($chooseColor);
-console.log($designSelector);
 
+//changes what colors that are available to each design.
 $("#design").change(function(){
 	  $designSelector.hide();
-
-	  // $chooseColor.hide();
 	
 	  if  ($('#design').val() === 'js puns'){ 
 	  	
@@ -54,8 +51,6 @@ $("#design").change(function(){
 
 	  	if  ($('#color option:eq(0).selected'))  {
 	  		$chooseColor.hide();
-	  		// $('#color option:eq(1)').prop('selected', true);
-
 	  		
 	  	} else {
 	  		$chooseColor.remove();
@@ -140,10 +135,8 @@ $('.activities').change((event)=>{
 $('#payment').children('option').eq(0).hide();
 
 const $creditCard = $('#payment option[value = "credit card"]');
-const $creditCardInfo = $('#credit-card'); // I can delete this and use the id 
 const $payPal = $('#payment option[value = "paypal"]');
 const $bitcoin = $('#payment option[value = "bitcoin"]');
-// const traverseToPaymentFieldset = $('form:nth-child(4)').attr('id', 'paymentFieldSet');
 const $payPalInfo = $('#credit-card').next();
 const $bitcoinInfo = $payPalInfo.next();
 
@@ -151,7 +144,7 @@ const $bitcoinInfo = $payPalInfo.next();
 $payPalInfo.hide();
 $bitcoinInfo.hide();
 
-
+//hides/shows info according to which payment option selected.
 $('#payment').change(()=>{
 	let $valueOfOption = $('#payment').val();
 
@@ -174,18 +167,19 @@ $('#payment').change(()=>{
 		$bitcoinInfo.show();
 	}
 });
+
 /***********************VALIDATION***********************************************/
 
 
 //validated that there is a name entered and that the name is formatted with at least one space.
-//Extra credit: Gives different error messages depending on blank field or wrongly formatted name. 
+//Gives different error messages depending on blank field or wrongly formatted name. 
 function validName() {
 	const $name = $('#name');
 	const $nameRegEx =   /[A-Z]*[a-z]* [A-Z]*[a-z]*/;
 	const $nameResult = $nameRegEx.test($name.val());
 	if ($name.val().length > 0 && $nameResult == true) {
 		$name.css('borderColor', '#c1deeb');
-
+		$('.incorrectName').remove()
 		return true;
 	} else if ($name.val().length > 0 && $nameResult == false){
 		$name.css('borderColor', 'red');
@@ -198,12 +192,13 @@ function validName() {
 
 	}
 }
-//Extra credit real time validation
+//Real time validation
 $("#name").on('keyup', function(){
 	$('.incorrectName').remove();
 
 	validName();
 });
+
 
 function validEmail() {
   const $email = $('#mail');
@@ -220,7 +215,7 @@ function validEmail() {
 	$('.incorrect').hide();
 	return true;
   }
-  console.log($emailResult);
+  
 };
 
 $('#email').on('input',(e) => {
@@ -265,7 +260,7 @@ function validCardNumber() {
 		return true;
 		
 	}
-	console.log(validCardNumber)
+	
 }
 function validZipCode() {
 	const zipCode = $('#zip').val();
@@ -334,10 +329,10 @@ function validateForm() {
 	
 
 }
-
+//submits form if all form elemenmts are valid. Removes error messages before validating again.
 $('form').submit((event)=>{
 	$('.incorrect').remove();
-	$('.incorrectName').remove()
+	
 	
 
 	if (validateForm() == false){
