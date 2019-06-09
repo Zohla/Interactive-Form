@@ -256,12 +256,12 @@ function validCardNumber() {
 	const cardResult = cardRegX.test(cardNumber);
 	if (cardResult === false) {
 		$('#cc-num').css('borderColor', 'red');
-		$('#cc-num').prev().append('<span class="incorrect">  Enter valid card number.</span>');
+		$('#cc-num').prev().append('<span class=" incorrectCard incorrect">  Enter valid card number.</span>');
 		return false;
 		
 	} else {
 		$('#cc-num').css('borderColor', '#c1deeb');
-		$('.incorrect').hide();
+		$('.incorrectCard').hide();
 		return true;
 		
 	}
@@ -273,12 +273,12 @@ function validZipCode() {
 	const zipResult = zipRegX.test(zipCode);
 	if (zipResult === false) {
 		$('#zip').css('borderColor', 'red');
-		$('#zip').prev().append('<span class="incorrect">  Incorrect.</span>');
+		$('#zip').prev().append('<span class=" incorrectZip incorrect">  Incorrect.</span>');
 		return false;
 		
 	} else {
 		$('#zip').css('borderColor', '#c1deeb');
-		$('.incorrect').hide();
+		$('.incorrectZip').hide();
 		return true;
 	}
 }
@@ -288,13 +288,13 @@ function validCVV() {
 	const cvvResult = cvvRegX.test(cvv);
 	if (cvvResult === false) {
 		$('#cvv').css('borderColor', 'red');
-		$('#cvv').prev().append('<span class="incorrect">  Incorrect.</span>');
+		$('#cvv').prev().append('<span class="incorrectCVV incorrect">  Incorrect.</span>');
 		
 		return false;
 
 	} else {
 		$('#cvv').css('borderColor', '#c1deeb');
-		$('.incorrect').hide();
+		$('.incorrectCVV').hide();
 		return true;
 	}
 }
