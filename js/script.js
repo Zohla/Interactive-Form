@@ -218,11 +218,7 @@ function validEmail() {
   
 };
 
-$('#email').on('input',(e) => {
-	
 
-	validEmail();
-});
 
   
   
