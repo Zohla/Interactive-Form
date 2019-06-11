@@ -18,7 +18,7 @@ $("#name").focus();
 /************JOB ROLE*************************/
 
 // adds function to show text field if 'other' job role is chosen. 
-$("#title").click(function(){
+$("#title").change(function(){
   if  ($('#title').val() === 'other'){
     $('#toggle_other_job').show(500);
   } else {
@@ -243,7 +243,7 @@ function validActivities(){
 
 function validCardNumber() {
 	const cardNumber = $('#cc-num').val();
-	const cardRegX = /\d{13,16}/;
+	const cardRegX = /^\d{13,16}$/;
 	const cardResult = cardRegX.test(cardNumber);
 	if (cardResult === false) {
 		$('#cc-num').css('borderColor', 'red');
@@ -260,7 +260,7 @@ function validCardNumber() {
 }
 function validZipCode() {
 	const zipCode = $('#zip').val();
-	const zipRegX = /\d{5}/;
+	const zipRegX = /^\d{5}$/;
 	const zipResult = zipRegX.test(zipCode);
 	if (zipResult === false) {
 		$('#zip').css('borderColor', 'red');
@@ -275,7 +275,7 @@ function validZipCode() {
 }
 function validCVV() {
 	const cvv = $('#cvv').val();
-	const cvvRegX = /\d{3}/;
+	const cvvRegX = /^\d{3}$/;
 	const cvvResult = cvvRegX.test(cvv);
 	if (cvvResult === false) {
 		$('#cvv').css('borderColor', 'red');
